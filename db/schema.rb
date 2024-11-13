@@ -10,9 +10,69 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_30_223927) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_13_013603) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "expense_payers", force: :cascade do |t|
+    t.decimal "paid_amount", precision: 10, scale: 2, default: "0.0"
+    t.string "description"
+    t.date "date"
+    t.bigint "user_id", null: false
+    t.bigint "group_id", null: false
+    t.bigint "receiver_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_expense_payers_on_group_id"
+    t.index ["receiver_id"], name: "index_expense_payers_on_receiver_id"
+    t.index ["user_id"], name: "index_expense_payers_on_user_id"
+  end
+
+  create_table "expense_shares", force: :cascade do |t|
+    t.decimal "share_amount", precision: 10, scale: 2, default: "0.0"
+    t.string "category"
+    t.decimal "per_person_amount", precision: 10, scale: 2
+    t.bigint "user_id", null: false
+    t.bigint "expense_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["expense_id"], name: "index_expense_shares_on_expense_id"
+    t.index ["user_id"], name: "index_expense_shares_on_user_id"
+  end
+
+  create_table "expenses", force: :cascade do |t|
+    t.string "name_expense"
+    t.string "description"
+    t.date "date"
+    t.decimal "amount", precision: 10, scale: 2, default: "0.0"
+    t.bigint "group_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_expenses_on_group_id"
+    t.index ["user_id"], name: "index_expenses_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name_group"
+    t.string "description_group"
+    t.string "observation"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_groups_on_user_id"
+  end
+
+  create_table "user_groups", force: :cascade do |t|
+    t.boolean "invite_accepted", default: false
+    t.bigint "user_id", null: false
+    t.bigint "groups_id", null: false
+    t.string "user_mail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["groups_id"], name: "index_user_groups_on_groups_id"
+    t.index ["user_id"], name: "index_user_groups_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -26,4 +86,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_30_223927) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "expense_payers", "groups"
+  add_foreign_key "expense_payers", "users"
+  add_foreign_key "expense_payers", "users", column: "receiver_id"
+  add_foreign_key "expense_shares", "expenses"
+  add_foreign_key "expense_shares", "users"
+  add_foreign_key "expenses", "groups"
+  add_foreign_key "expenses", "users"
+  add_foreign_key "groups", "users"
+  add_foreign_key "user_groups", "groups", column: "groups_id"
+  add_foreign_key "user_groups", "users"
 end
