@@ -1,0 +1,15 @@
+<div class="modal-groups">
+    <hr class="division-line">
+    <h4 class="title-group">Seus Grupos</h4>
+    <% if @groups.any? %>
+        <div class="group-list">
+            <% @groups.each do |group| %>
+            
+                <%=group.name_group%>
+            <% end %>
+        </div> 
+    <% else %>
+        <p>Você ainda não possui nenhum grupo.</p>
+    <% end %>
+       
+</div>
