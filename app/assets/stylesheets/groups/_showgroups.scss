@@ -1,0 +1,21 @@
+.group-show-modal-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 5px;
+    padding: 16px;
+    position: relative;
+}
+
+.h4-index-groups {
+    margin-top: 16px;
+}
+
+.group-show-image {
+    width: 120px;
+    height: 120px;
+    border: black 1px solid;
+    border-radius: 50%;
+    margin-top: 16px;
+}
