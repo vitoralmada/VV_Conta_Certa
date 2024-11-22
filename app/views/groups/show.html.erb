@@ -1,7 +1,21 @@
-<div class="group-show-modal-header">
+<div class="container bg-do-ed">
+    <div class="row justify-content-center group-show-modal-invisivel">
+        <div class="col-sm-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
 
+            <div class="group-show-modal-header">
 
-    <h4 class="h4-index-groups h4-groups"><%= @group.name_group %></h4>
-    <p><%= @group.description_group %></p>
+                <% if @group.photo.attached? %>
+                    <%= image_tag @group.photo, class: "group-show-image" %>
+                <% else %>
+                    <%= image_tag "placeholder-image.png", class: "group-show-image" %>
+                <% end %>
 
+                <h4 class="h4-index-groups h4-groups"><%= @group.name_group %></h4>
+                <p><%= @group.description_group %></p>
+
+                
+
+            </div>
+        </div>
+    </div>
 </div>
