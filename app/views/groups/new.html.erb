@@ -1,23 +1,58 @@
-<%= simple_form_for @group do |f| %>
-    <%= f.error_notification %>
-    
-    <div class="w-100">
-        <%= f.input :name_group, label: false, input_html: { placeholder: "Digite o nome do Grupo", class: "input-new-group" } %>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+            <div class="modal-groups">
+                <h4>Personalize o seu grupo adicionando uma Foto, Nome e Descrição</h4>
+                <hr class="division-line">
+
+                <%= simple_form_for @group do |f| %>
+                    <%= f.error_notification %>
+
+                    <div class="d-flex justify-content-center">
+                        <div class="avatar-container" style="border-radius: 50%;">
+                            <% if @group.photo.attached? %>
+                                <%= image_tag @group.photo, width: "180", height: "180" %>
+                            <% else %>
+                                <%= image_tag "placeholder-image.png", width: "180", height: "180" %>
+                            <% end %>
+
+                    
+
+                        </div>
+                    </div>
+
+                    <%= f.input :photo, as: :file, label: "Upload de Foto" %>
+
+                    <div class="group-pattern-lightblue d-flex">
+                        <div class="w-100">
+                            <%= f.input :name_group, label: false, input_html: { placeholder: "Digite o nome do Grupo", class: "input-new-group" } %>
+                        </div>
+                        
+                        <%= image_tag "icons/pencil.png" %>
+                        
+                    </div>
+
+                    <div class="group-pattern-lightblue d-flex">
+                        <div class="w-100">
+                            <%= f.input :description_group, label: false, input_html: { placeholder: "Adicione uma descrição", class: "input-new-group" } %>
+                        </div>
+                        <%= image_tag "icons/pencil.png" %>
+                    </div>
+
+                    <hr class="division-line">
+                    <%= f.button :submit, "SALVAR E CRIAR", class: "btn create-button-new" %>
+
+                <% end %>
+
+                
+            </div>
+
+            <div class="image-logo logo-footer">
+                <%= image_tag("logo.png")%>
+            </div>
+
+
+
+        </div>
     </div>
-   
-  
-    <div class="w-100">
-        <%= f.input :description_group, label: false, input_html: { placeholder: "Adicione uma descrição", class: "input-new-group" } %>
-    </div>
-
-   
-    <div class="w-100">
-        <%= f.input :photo, as: :file, label: "Foto do Grupo", input_html: { class: "input-new-group" } %>
-    </div>
-
-
-    <hr class="division-line">
-
-
-    <%= f.button :submit, "SALVAR E CRIAR", class: "btn create-button-new" %>
-<% end %>
+</div>

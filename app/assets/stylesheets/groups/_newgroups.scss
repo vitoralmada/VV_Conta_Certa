@@ -1,0 +1,50 @@
+.group-pattern-lightblue {
+  display: flex !important;
+  width: 100%;
+  height: 50px !important;
+  margin-top: 16px;
+  margin-bottom: 16px;
+
+  flex-direction: row;
+  justify-content: space-between !important;
+  align-items: flex-start;
+  background-color: #DDE7FF;
+  color: #104749;
+  border-radius: 5px;
+  margin-bottom: 16px;
+
+}
+
+
+
+.input-new-group {
+  width: 100% !important;
+  height: 50px !important;
+  background-color: #DDE7FF;
+  color: #0B3234;
+  border-radius: 5px;
+  border: var(--bs-border-width) solid #DDE7FF;
+  &:focus {
+    background-color: #DDE7FF;
+    border-color: transparent;
+    box-shadow: none;
+    font-family: "Ubuntu", "sans-serif";
+  }
+}
+
+
+.create-button-new {
+  width: 50%;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  background-color: #5487FC;
+  border-radius: 25px;
+  transition: background-color 0.3s;
+}
+
+.create-button-new:hover {
+  background-color: #2b66f0;
+  color: white;
+}
